@@ -14,13 +14,20 @@ from PIL import Image
 from config import *
 from utils import *
 from data import MoNuSegDataset
-from unet import UNet
+from models import UNet, ResUNet, LinkNet34
 from loss import MultiLoss 
 import metrics
 
+# Mapping model names to their corresponding classes
+MODELS = {
+    "unet" : UNet,
+    "resunet" : ResUNet,
+    "linknet" : LinkNet34
+}
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-m", "--model", choices=['unet'], default="unet")
+    parser.add_argument("-m", "--model", choices=[*MODELS], default="unet")
     parser.add_argument("--train", action="store_true", help="Enable training mode")
     parser.add_argument("--resume", action="store_true", help="Load model from existing checkpoint")
     args = parser.parse_args()
@@ -73,11 +80,13 @@ if __name__ == '__main__':
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY)
     test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY)
 
-    if args.model == "unet":
-        model = UNet(3, 1).to(device=DEVICE)
-    else:
-        raise ValueError('Wrong model selected')
-    
+    # Ensure that the selected model exists in MODELS
+    if args.model not in MODELS:
+        raise ValueError(f"Invalid model choice '{args.model}'. Choose from {list(*MODELS)}")
+    # Initialize the selected model
+    model = MODELS[args.model](3, 1).to(device=DEVICE)
+
+    print(f"Model: {model.name}")
     loss = MultiLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
