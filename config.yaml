@@ -8,3 +8,8 @@ num_workers: 2
 patch_size: 256
 img_size: 1024
 pin_memory: true
+
+vit_patch_size: 16
+vit_embed_dim: 512
+vit_depth: 18
+vit_num_heads: 4

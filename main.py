@@ -1,5 +1,6 @@
 import os
 import argparse
+from functools import partial
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,7 +15,7 @@ from PIL import Image
 from config import *
 from utils import *
 from data import MoNuSegDataset
-from models import UNet, ResUNet, LinkNet34
+from models import UNet, ResUNet, ViT_UNet, LinkNet34
 from loss import MultiLoss 
 import metrics
 
@@ -22,6 +23,8 @@ import metrics
 MODELS = {
     "unet" : UNet,
     "resunet" : ResUNet,
+    "vit_unet" : partial(ViT_UNet, img_size=PATCH_SIZE, patch_size=VIT_PATCH_SIZE,
+                         embed_dim=VIT_EMBED_DIM, depth=VIT_DEPTH, num_heads=VIT_NUM_HEADS),
     "linknet" : LinkNet34
 }
 

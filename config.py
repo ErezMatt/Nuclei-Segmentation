@@ -17,4 +17,9 @@ IMG_SIZE = config["img_size"]
 TRAIN_DIR_PATH = config["train_dir"]
 TEST_DIR_PATH = config["test_dir"]
 
+VIT_PATCH_SIZE = config["vit_patch_size"]
+VIT_EMBED_DIM = config["vit_embed_dim"]
+VIT_DEPTH = config["vit_depth"]
+VIT_NUM_HEADS = config["vit_num_heads"]
+
 CHECKPOINT_DIR = "checkpoints"
