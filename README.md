@@ -2,7 +2,7 @@
 Nucleus segmentation in histopathological images using deep learning methods.
 
 ## Overview
-This project focuses on segmenting nuclei in histopathological images using deep learning techniques. It implements and evaluates **U-Net, ResUNet, and LinkNet-34** models on the **MoNuSeg dataset** and compare their  performance.
+This project focuses on segmenting nuclei in histopathological images using deep learning techniques. It implements and evaluates **U-Net, ResUNet, LinkNet-34 and U-Net + Vision Transformer (ViT)** models on the **MoNuSeg dataset** and compare their  performance. It was based on a paper [Deep Learning-Based Cellular Nuclei Segmentation Using Transformer Model](https://link.springer.com/chapter/10.1007/978-3-031-70421-5_18), but created in pytorch, with different parameters, and hyperparameters.
 
 ## Dataset
 The [**MoNuSeg dataset**](https://monuseg.grand-challenge.org/Data) is used for training and evaluation. It consists of histopathological images with nuclei masks.
@@ -39,6 +39,7 @@ Below is a table comparing the results of different models on the test dataset. 
 | U-Net      | 0.4915  | 0.7923     | 0.8890     | 0.6572 |
 | ResUNet    | 0.4455  | 0.8089     | 0.8987     | 0.6809 |
 | LinkNet-34 | 0.4387  | 0.8045     | 0.9015     | 0.6742 |
+|  U-Net + Vision Transformer | 0.4982  | 0.7863     | 0.8911     | 0.6491 |
 
 ### Example Segmentation Results of U-Net Model
 | ![Input](img/example_results/input.png) | ![Mask](img/example_results/mask.png) | ![Prediction](img/example_results/pred.png) |
